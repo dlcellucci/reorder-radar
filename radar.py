@@ -92,8 +92,7 @@ def run_radar(dates, totals, as_of):
         r = score_account(dates[account], totals[account], as_of)
         r["account"] = account
         rows.append(r)
-    rows.sort(key=lambda r: (STATUS_ORDER.index(r["status"]), -(r["days_late"] or 0), -r["avg_order"]))
-    return rows
+   rows.sort(key=lambda r: (STATUS_ORDER.index(r["status"]), -r["avg_order"], -(r["days_late"] or 0)))    return rows
 
 
 def print_table(rows, as_of):
