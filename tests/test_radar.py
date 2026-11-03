@@ -63,7 +63,8 @@ class SampleDataTests(unittest.TestCase):
     def setUp(self):
         path = os.path.join(os.path.dirname(__file__), "..", "data", "orders.csv")
         dates, totals = radar.load_orders(path)
-        self.rows = {r["account"]: r for r in radar.run_radar(dates, totals, AS_OF)}
+        self._ranked = radar.run_radar(dates, totals, AS_OF)
+        self.rows = {r["account"]: r for r in self._ranked}
 
     def test_expected_statuses(self):
         expected = {
@@ -77,6 +78,10 @@ class SampleDataTests(unittest.TestCase):
             "Cedar Street Shop": "On track",
         }
         self.assertEqual({k: v["status"] for k, v in self.rows.items()}, expected)
+
+    def test_overdue_ranked_by_order_size(self):
+        overdue = [r["account"] for r in self._ranked if r["status"] == "Overdue"]
+        self.assertEqual(overdue, ["Harbor Light Co-op", "Old Mill Mercantile", "Riverbend Supply"])
 
     def test_sample_has_48_orders(self):
         self.assertEqual(sum(r["orders"] for r in self.rows.values()), 48)
