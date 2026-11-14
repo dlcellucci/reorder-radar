@@ -1,0 +1,30 @@
+order_id,order_date,account,status,product,category,quantity,unit_price
+1001,2026-09-21,Harbor Light Co-op,delivered,Ethiopia Guji - 12oz Bag,Retail Bag,48,9.5
+1001,2026-09-21,Harbor Light Co-op,delivered,Ethiopia Guji - 5lb Bag,Wholesale Bag,4,62
+1002,2026-10-05,Harbor Light Co-op,delivered,Colombia Huila - 12oz Bag,Retail Bag,48,9.5
+1002,2026-10-05,Harbor Light Co-op,delivered,Colombia Huila - 5lb Bag,Wholesale Bag,4,62
+1003,2026-10-19,Harbor Light Co-op,delivered,Ethiopia Guji - 12oz Bag,Retail Bag,48,9.5
+1003,2026-10-19,Harbor Light Co-op,delivered,Ethiopia Guji - 5lb Bag,Wholesale Bag,4,62
+1004,2026-11-02,Harbor Light Co-op,delivered,Sumatra Mandheling - 12oz Bag,Retail Bag,48,9.5
+1004,2026-11-02,Harbor Light Co-op,delivered,Sumatra Mandheling - 5lb Bag,Wholesale Bag,4,62
+1005,2026-08-25,Cedar Street Shop,delivered,Colombia Huila - 12oz Bag,Retail Bag,36,9.5
+1005,2026-08-25,Cedar Street Shop,delivered,House Blend - 2oz Sample Pack,Sample Pack,20,3
+1006,2026-09-15,Cedar Street Shop,delivered,Colombia Huila - 12oz Bag,Retail Bag,36,9.5
+1006,2026-09-15,Cedar Street Shop,delivered,House Blend - 2oz Sample Pack,Sample Pack,20,3
+1007,2026-10-06,Cedar Street Shop,delivered,Colombia Huila - 12oz Bag,Retail Bag,36,9.5
+1007,2026-10-06,Cedar Street Shop,delivered,House Blend - 2oz Sample Pack,Sample Pack,20,3
+1008,2026-10-27,Cedar Street Shop,delivered,Colombia Huila - 12oz Bag,Retail Bag,36,9.5
+1008,2026-10-27,Cedar Street Shop,delivered,House Blend - 2oz Sample Pack,Sample Pack,20,3
+1009,2026-07-17,North Fork Provisions,delivered,Guatemala Antigua - 5lb Bag,Wholesale Bag,10,58
+1010,2026-08-16,North Fork Provisions,delivered,Guatemala Antigua - 5lb Bag,Wholesale Bag,10,58
+1011,2026-09-15,North Fork Provisions,delivered,Guatemala Antigua - 5lb Bag,Wholesale Bag,10,58
+1012,2026-10-15,North Fork Provisions,delivered,Guatemala Antigua - 5lb Bag,Wholesale Bag,10,58
+1013,2026-09-02,Pine Hollow Market,delivered,Ethiopia Guji - 12oz Bag,Retail Bag,24,9.5
+1014,2026-09-23,Pine Hollow Market,delivered,Ethiopia Guji - 12oz Bag,Retail Bag,24,9.5
+1015,2026-10-14,Pine Hollow Market,delivered,Ethiopia Guji - 12oz Bag,Retail Bag,24,9.5
+1016,2026-11-10,Pine Hollow Market,open,Ethiopia Guji - 12oz Bag,Retail Bag,24,9.5
+1017,2026-10-01,Summit Farm Stand,delivered,House Blend - 12oz Bag,Retail Bag,12,9.5
+1018,2026-10-29,Summit Farm Stand,delivered,House Blend - 12oz Bag,Retail Bag,12,9.5
+1019,2026-08-31,Old Mill Mercantile,delivered,Colombia Huila - 12oz Bag,Retail Bag,30,9.5
+1020,2026-09-30,Old Mill Mercantile,delivered,Colombia Huila - 12oz Bag,Retail Bag,30,9.5
+1021,2026-10-30,Old Mill Mercantile,delivered,Colombia Huila - 12oz Bag,Retail Bag,30,9.5

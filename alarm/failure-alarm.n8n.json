@@ -1,0 +1,35 @@
+{
+  "name": "Failure alarm",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Error Trigger",
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "authentication": "accessToken",
+        "resource": "message",
+        "operation": "post",
+        "select": "user",
+        "user": { "__rl": true, "mode": "id", "value": "YOUR_SLACK_USER_ID" },
+        "messageType": "text",
+        "text": "=:rotating_light: *Workflow failed:* {{ $json.workflow.name }}\nStep that broke: {{ $json.execution.lastNodeExecuted }}\nError: {{ $json.execution.error.message }}\n{{ $json.execution.url }}",
+        "otherOptions": { "includeLinkToWorkflow": false }
+      },
+      "name": "DM me in Slack",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.7,
+      "position": [224, 0],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000
+    }
+  ],
+  "connections": {
+    "Error Trigger": { "main": [[{ "node": "DM me in Slack", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" }
+}
