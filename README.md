@@ -84,11 +84,61 @@ Your order data stays on your computer. Nothing is sent anywhere.
 python -m unittest discover tests
 ```
 
-The tests check every rule edge (exactly 7 days late is Due now, 8 is Overdue) and that the sample data comes out exactly as shown above. If you change a rule, a test should fail. That's on purpose.
+The radar tests check every rule edge (exactly 7 days late is Due now, 8 is Overdue) and that the sample data comes out exactly as shown above. If you change a rule, a test should fail. That's on purpose. The cart tests check the due window (3 early is in, 4 is out), that it never promises more than you have, that stock is held between accounts, and that the sample data comes out exactly as shown below.
+
+## Reorder Cart: who's about to be due, and what to send them
+
+The radar tells you who's already late. `cart.py` gets you there first. Every account whose next order lands **3 days early to 2 days late** on its own rhythm gets a suggested cart built from what you actually have in stock.
+
+```bash
+python cart.py data/order_lines.csv data/inventory.csv --as-of 2026-11-16
+```
+
+```
+Harbor Light Co-op: due today, orders every 14 days, avg $704
+     24 x Colombia Huila - 12oz Bag @ $9.50
+     24 x Ethiopia Guji - 12oz Bag @ $9.50
+      2 x Ethiopia Guji - 5lb Bag @ $62.00
+      2 x Guatemala Antigua - 5lb Bag @ $58.00  (different variety, same type)
+   Cart total: $696.00
+   Never tried: Kenya AA - 12oz Bag, Decaf Swiss Water - 12oz Bag
+
+North Fork Provisions: 2 days late, orders every 30 days, avg $580
+      4 x Guatemala Antigua - 5lb Bag @ $58.00
+   Cart total: $232.00
+   Never tried: Cold Brew Pack - 2lb Bag
+   ! Short 6 of 5lb bag
+   ! Cart is under half their average
+```
+
+How it builds the cart:
+
+- **By product type, not variety.** Varieties rotate. If an account always takes 48 "12oz Bag" and their usual one is gone, it fills the line with another 12oz Bag you have, and marks it so you can check.
+- **Their usual amount.** The middle (median) quantity of each type over their last 3 orders.
+- **One or two things they've never bought**, from categories they already buy.
+- **It holds stock as it goes.** Bigger accounts get first claim, so two accounts are never promised the same units. North Fork comes up short above because Harbor Light already claimed the 5lb bags.
+- **It skips** accounts with an open order and accounts with fewer than 3 orders.
+
+The `!` lines are the point. A cart under half their usual order, a line with no price, or a type you're out of is a cart a person needs to look at before it goes anywhere.
+
+The real problem it found for me: my biggest accounts' carts came up way short. The bottleneck wasn't getting the next order, it was having product made and out the door in time.
+
+Your order lines CSV needs `order_id, order_date, account, status, product, category, quantity, unit_price`. Inventory needs `product, category, available, list_price`. Products are named `Variety - Type` (like `Kenya AA - 12oz Bag`); the part after ` - ` is the type.
+
+### Where the cart can be wrong
+
+- It trusts your list prices. A $0 list price gets flagged, but a stale one doesn't.
+- "Same type, different variety" is a guess. Some buyers only want one specific variety.
+- It doesn't know a buyer is overstocked, closed, or just switched brands.
+- It suggests. It never sends. A person approves every cart.
+
+## Failure alarm
+
+`alarm/` has a two-box n8n workflow that Slack-messages you the moment any automation fails. See [alarm/README.md](alarm/README.md).
 
 ## Sample data
 
-`data/orders.csv` is 48 made-up orders from 8 made-up stores. No real customers.
+`data/orders.csv` is 48 made-up orders from 8 made-up stores. `data/order_lines.csv` and `data/inventory.csv` are a made-up coffee roaster's order lines and stock. No real customers.
 
 ## License
 
